@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - DB_HOST=172.173.137.254
+      - DB_USER=root
+      - DB_PASSWORD=Master_2010
+      - DB_NAME=monavocat
+      - DB_PORT=3307
+      - JWT_SECRET=production-secret-key-change-me
+      - JWT_EXPIRY=15m
+      - REFRESH_TOKEN_EXPIRY=7d
+      - BCRYPT_ROUNDS=10
+      - RATE_LIMIT_WINDOW=900000
+      - RATE_LIMIT_MAX=5
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./logs:/app/logs
+
