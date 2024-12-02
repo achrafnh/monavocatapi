@@ -239,3 +239,14 @@ chmod +x test-endpoints.sh
 ```
 
 Note: Replace any placeholder values (like user_id_from_login_response) with actual values from previous responses.
+
+
+# Search lawyers with text query
+curl "http://172.173.137.254:3000/api/v1/search/lawyers?q=corporate%20law"
+
+# Search with filters
+curl "http://172.173.137.254:3000/api/v1/search/lawyers?specialization=Corporate%20Law&minExperience=5&maxRate=200&languages=English&location=Paris"
+
+# Search with pagination
+curl "http://172.173.137.254:3000/api/v1/search/lawyers?page=1&limit=10&minRating=4"
+

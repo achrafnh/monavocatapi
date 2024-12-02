@@ -1,4 +1,9 @@
 import winston from 'winston';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const logsDir = join(__dirname, '../../../logs');
 
 export const logger = winston.createLogger({
   level: 'info',
@@ -11,11 +16,11 @@ export const logger = winston.createLogger({
       format: winston.format.simple()
     }),
     new winston.transports.File({ 
-      filename: 'logs/error.log', 
+      filename: join(logsDir, 'error.log'), 
       level: 'error' 
     }),
     new winston.transports.File({ 
-      filename: 'logs/combined.log' 
+      filename: join(logsDir, 'combined.log')
     })
   ]
 });

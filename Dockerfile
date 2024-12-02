@@ -11,6 +11,7 @@ RUN npm install
 # Copy project files
 COPY . .
 
+RUN mkdir -p logs
 # Build both client and server
 RUN npm run build:all
 
@@ -24,11 +25,13 @@ WORKDIR /app
 # Copy built assets and necessary files
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package*.json ./
+COPY --from=build /app/src ./src
 #COPY --from=build /app/.env.production ./dist/server/.env
 
 # Install production dependencies only
 RUN npm ci --omit=dev
 
+RUN npm install -g tsx
 # Create logs directory and set permissions
 RUN mkdir -p logs && chown -R node:node logs
 
